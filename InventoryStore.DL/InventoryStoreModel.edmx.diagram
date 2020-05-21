@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a830636df46e4523a7dfa174a523751f" Name="Diagram1">
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Brands" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Categories" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Groups" Width="1.5" PointX="5.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Orders" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Products" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Stores" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Supplier" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryStoreModel.tbl_Users" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="InventoryStoreModel.FK_tbl_Brands_tbl_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryStoreModel.FK_tbl_Products_tbl_Brand_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryStoreModel.FK_tbl_Products_tbl_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryStoreModel.FK_tbl_Users_tbl_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryStoreModel.FK_tbl_Products_tbl_Stores" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryStoreModel.FK_tbl_Products_tbl_Supplier_Id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

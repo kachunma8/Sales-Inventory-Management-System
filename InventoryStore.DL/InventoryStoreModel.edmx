@@ -1,0 +1,984 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventoryStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Brands">
+          <Key>
+            <PropertyRef Name="Brand_Id" />
+          </Key>
+          <Property Name="Brand_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Brand_Status" Type="bit" Nullable="false" />
+          <Property Name="Category_id" Type="int" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Categories">
+          <Key>
+            <PropertyRef Name="Category_Id" />
+          </Key>
+          <Property Name="Category_Id" Type="int" Nullable="false" />
+          <Property Name="Category_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Category_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Groups">
+          <Key>
+            <PropertyRef Name="Group_Id" />
+          </Key>
+          <Property Name="Group_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Menu_Access" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Orders">
+          <Key>
+            <PropertyRef Name="Order_Id" />
+          </Key>
+          <Property Name="Order_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="int" />
+          <Property Name="Items_Count" Type="int" />
+          <Property Name="Product_Cost" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Bill_No" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Customer_Address" Type="varchar" MaxLength="50" />
+          <Property Name="Customer_Phone" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Gross_Amount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Service_Charge" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Vat_Charge" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NetAmount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Paid_Status" Type="int" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SKU" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Supplier_Id" Type="int" Nullable="false" />
+          <Property Name="Category_Id" Type="int" Nullable="false" />
+          <Property Name="Brand_Id" Type="int" Nullable="false" />
+          <Property Name="Store_Id" Type="int" Nullable="false" />
+          <Property Name="Product_Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Product_Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+          <Property Name="Availability" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Stores">
+          <Key>
+            <PropertyRef Name="Store_Id" />
+          </Key>
+          <Property Name="Store_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Store_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Store_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_Id" />
+          </Key>
+          <Property Name="Supplier_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Service_Charge_Value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vat_Charge_Value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Currency" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email_Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Group_Id" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_Brands_tbl_Categories">
+          <End Role="tbl_Categories" Type="Self.tbl_Categories" Multiplicity="0..1" />
+          <End Role="tbl_Brands" Type="Self.tbl_Brands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categories">
+              <PropertyRef Name="Category_Id" />
+            </Principal>
+            <Dependent Role="tbl_Brands">
+              <PropertyRef Name="Category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Brand_Id">
+          <End Role="tbl_Brands" Type="Self.tbl_Brands" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Brands">
+              <PropertyRef Name="Brand_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Brand_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Categories">
+          <End Role="tbl_Categories" Type="Self.tbl_Categories" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categories">
+              <PropertyRef Name="Category_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Stores">
+          <End Role="tbl_Stores" Type="Self.tbl_Stores" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Stores">
+              <PropertyRef Name="Store_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Store_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Supplier_Id">
+          <End Role="tbl_Supplier" Type="Self.tbl_Supplier" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Supplier">
+              <PropertyRef Name="Supplier_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Supplier_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Users_tbl_Groups">
+          <End Role="tbl_Groups" Type="Self.tbl_Groups" Multiplicity="1" />
+          <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="tbl_Users">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="delete_Store" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="store_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="parlevelproducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="qty" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Search_Store" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="store_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_Notifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parlevel" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_NotificationsByLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parlevel" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveBrand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="Category_id" Type="int" Mode="In" />
+          <Parameter Name="Company_Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Menus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="ProductId" Type="int" Mode="In" />
+          <Parameter Name="ItemsCount" Type="int" Mode="In" />
+          <Parameter Name="Cost" Type="numeric" Mode="In" />
+          <Parameter Name="Amount" Type="numeric" Mode="In" />
+          <Parameter Name="BillNo" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerName" Type="varchar" Mode="In" />
+          <Parameter Name="Customer_Address" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="date" Mode="In" />
+          <Parameter Name="GrossAmount" Type="numeric" Mode="In" />
+          <Parameter Name="SerivceCharge" Type="numeric" Mode="In" />
+          <Parameter Name="VatCharge" Type="numeric" Mode="In" />
+          <Parameter Name="Discount" Type="numeric" Mode="In" />
+          <Parameter Name="NetAmount" Type="numeric" Mode="In" />
+          <Parameter Name="PaidStatus" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="ProductName" Type="varchar" Mode="In" />
+          <Parameter Name="SKU" Type="varchar" Mode="In" />
+          <Parameter Name="SupplierId" Type="int" Mode="In" />
+          <Parameter Name="CategoryId" Type="int" Mode="In" />
+          <Parameter Name="BrandId" Type="int" Mode="In" />
+          <Parameter Name="StoreId" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="numeric" Mode="In" />
+          <Parameter Name="ExpiryDate" Type="datetime" Mode="In" />
+          <Parameter Name="Availability" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="ServiceCharge" Type="varchar" Mode="In" />
+          <Parameter Name="Vat" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Country" Type="varchar" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="In" />
+          <Parameter Name="Currency" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_SaveUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Update_Store" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Store_Name" Type="varchar" Mode="In" />
+          <Parameter Name="store_status" Type="int" Mode="In" />
+          <Parameter Name="store_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ViewAll_Stores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="InventoryStoreModelStoreContainer">
+          <EntitySet Name="tbl_Brands" EntityType="Self.tbl_Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Categories" EntityType="Self.tbl_Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Groups" EntityType="Self.tbl_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Orders" EntityType="Self.tbl_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Stores" EntityType="Self.tbl_Stores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Supplier" EntityType="Self.tbl_Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Brands_tbl_Categories" Association="Self.FK_tbl_Brands_tbl_Categories">
+            <End Role="tbl_Categories" EntitySet="tbl_Categories" />
+            <End Role="tbl_Brands" EntitySet="tbl_Brands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Brand_Id" Association="Self.FK_tbl_Products_tbl_Brand_Id">
+            <End Role="tbl_Brands" EntitySet="tbl_Brands" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Categories" Association="Self.FK_tbl_Products_tbl_Categories">
+            <End Role="tbl_Categories" EntitySet="tbl_Categories" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Stores" Association="Self.FK_tbl_Products_tbl_Stores">
+            <End Role="tbl_Stores" EntitySet="tbl_Stores" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Supplier_Id" Association="Self.FK_tbl_Products_tbl_Supplier_Id">
+            <End Role="tbl_Supplier" EntitySet="tbl_Supplier" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Users_tbl_Groups" Association="Self.FK_tbl_Users_tbl_Groups">
+            <End Role="tbl_Groups" EntitySet="tbl_Groups" />
+            <End Role="tbl_Users" EntitySet="tbl_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Brands">
+          <Key>
+            <PropertyRef Name="Brand_Id" />
+          </Key>
+          <Property Name="Brand_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Brand_Status" Type="Boolean" Nullable="false" />
+          <Property Name="Category_id" Type="Int32" />
+          <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Categories" Relationship="Self.FK_tbl_Brands_tbl_Categories" FromRole="tbl_Brands" ToRole="tbl_Categories" />
+          <NavigationProperty Name="tbl_Products" Relationship="Self.FK_tbl_Products_tbl_Brand_Id" FromRole="tbl_Brands" ToRole="tbl_Products" />
+        </EntityType>
+        <EntityType Name="tbl_Categories">
+          <Key>
+            <PropertyRef Name="Category_Id" />
+          </Key>
+          <Property Name="Category_Id" Type="Int32" Nullable="false" />
+          <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Category_Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_Brands" Relationship="Self.FK_tbl_Brands_tbl_Categories" FromRole="tbl_Categories" ToRole="tbl_Brands" />
+          <NavigationProperty Name="tbl_Products" Relationship="Self.FK_tbl_Products_tbl_Categories" FromRole="tbl_Categories" ToRole="tbl_Products" />
+        </EntityType>
+        <EntityType Name="tbl_Groups">
+          <Key>
+            <PropertyRef Name="Group_Id" />
+          </Key>
+          <Property Name="Group_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Menu_Access" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_Users" Relationship="Self.FK_tbl_Users_tbl_Groups" FromRole="tbl_Groups" ToRole="tbl_Users" />
+        </EntityType>
+        <EntityType Name="tbl_Orders">
+          <Key>
+            <PropertyRef Name="Order_Id" />
+          </Key>
+          <Property Name="Order_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int32" />
+          <Property Name="Items_Count" Type="Int32" />
+          <Property Name="Product_Cost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Bill_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Customer_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Gross_Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Service_Charge" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Vat_Charge" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NetAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Paid_Status" Type="Int32" />
+          <Property Name="User_Id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Supplier_Id" Type="Int32" Nullable="false" />
+          <Property Name="Category_Id" Type="Int32" Nullable="false" />
+          <Property Name="Brand_Id" Type="Int32" Nullable="false" />
+          <Property Name="Store_Id" Type="Int32" Nullable="false" />
+          <Property Name="Product_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Product_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Availability" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_Brands" Relationship="Self.FK_tbl_Products_tbl_Brand_Id" FromRole="tbl_Products" ToRole="tbl_Brands" />
+          <NavigationProperty Name="tbl_Categories" Relationship="Self.FK_tbl_Products_tbl_Categories" FromRole="tbl_Products" ToRole="tbl_Categories" />
+          <NavigationProperty Name="tbl_Stores" Relationship="Self.FK_tbl_Products_tbl_Stores" FromRole="tbl_Products" ToRole="tbl_Stores" />
+          <NavigationProperty Name="tbl_Supplier" Relationship="Self.FK_tbl_Products_tbl_Supplier_Id" FromRole="tbl_Products" ToRole="tbl_Supplier" />
+        </EntityType>
+        <EntityType Name="tbl_Stores">
+          <Key>
+            <PropertyRef Name="Store_Id" />
+          </Key>
+          <Property Name="Store_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Store_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Store_Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_Products" Relationship="Self.FK_tbl_Products_tbl_Stores" FromRole="tbl_Stores" ToRole="tbl_Products" />
+        </EntityType>
+        <EntityType Name="tbl_Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_Id" />
+          </Key>
+          <Property Name="Supplier_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Service_Charge_Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vat_Charge_Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_Products" Relationship="Self.FK_tbl_Products_tbl_Supplier_Id" FromRole="tbl_Supplier" ToRole="tbl_Products" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Group_Id" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_Groups" Relationship="Self.FK_tbl_Users_tbl_Groups" FromRole="tbl_Users" ToRole="tbl_Groups" />
+        </EntityType>
+        <Association Name="FK_tbl_Brands_tbl_Categories">
+          <End Role="tbl_Categories" Type="Self.tbl_Categories" Multiplicity="0..1" />
+          <End Role="tbl_Brands" Type="Self.tbl_Brands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categories">
+              <PropertyRef Name="Category_Id" />
+            </Principal>
+            <Dependent Role="tbl_Brands">
+              <PropertyRef Name="Category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Brand_Id">
+          <End Role="tbl_Brands" Type="Self.tbl_Brands" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Brands">
+              <PropertyRef Name="Brand_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Brand_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Categories">
+          <End Role="tbl_Categories" Type="Self.tbl_Categories" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categories">
+              <PropertyRef Name="Category_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Users_tbl_Groups">
+          <End Role="tbl_Groups" Type="Self.tbl_Groups" Multiplicity="1" />
+          <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Groups">
+              <PropertyRef Name="Group_Id" />
+            </Principal>
+            <Dependent Role="tbl_Users">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Stores">
+          <End Role="tbl_Stores" Type="Self.tbl_Stores" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Stores">
+              <PropertyRef Name="Store_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Store_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Products_tbl_Supplier_Id">
+          <End Role="tbl_Supplier" Type="Self.tbl_Supplier" Multiplicity="1" />
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Supplier">
+              <PropertyRef Name="Supplier_Id" />
+            </Principal>
+            <Dependent Role="tbl_Products">
+              <PropertyRef Name="Supplier_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryStoreEntityConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Brands" EntityType="Self.tbl_Brands" />
+          <EntitySet Name="tbl_Categories" EntityType="Self.tbl_Categories" />
+          <EntitySet Name="tbl_Groups" EntityType="Self.tbl_Groups" />
+          <EntitySet Name="tbl_Orders" EntityType="Self.tbl_Orders" />
+          <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" />
+          <EntitySet Name="tbl_Stores" EntityType="Self.tbl_Stores" />
+          <EntitySet Name="tbl_Supplier" EntityType="Self.tbl_Supplier" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" />
+          <AssociationSet Name="FK_tbl_Brands_tbl_Categories" Association="Self.FK_tbl_Brands_tbl_Categories">
+            <End Role="tbl_Categories" EntitySet="tbl_Categories" />
+            <End Role="tbl_Brands" EntitySet="tbl_Brands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Brand_Id" Association="Self.FK_tbl_Products_tbl_Brand_Id">
+            <End Role="tbl_Brands" EntitySet="tbl_Brands" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Categories" Association="Self.FK_tbl_Products_tbl_Categories">
+            <End Role="tbl_Categories" EntitySet="tbl_Categories" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Users_tbl_Groups" Association="Self.FK_tbl_Users_tbl_Groups">
+            <End Role="tbl_Groups" EntitySet="tbl_Groups" />
+            <End Role="tbl_Users" EntitySet="tbl_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Stores" Association="Self.FK_tbl_Products_tbl_Stores">
+            <End Role="tbl_Stores" EntitySet="tbl_Stores" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Products_tbl_Supplier_Id" Association="Self.FK_tbl_Products_tbl_Supplier_Id">
+            <End Role="tbl_Supplier" EntitySet="tbl_Supplier" />
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+          </AssociationSet>
+          <FunctionImport Name="delete_Store">
+            <Parameter Name="store_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="parlevelproducts" ReturnType="Collection(InventoryStoreModel.parlevelproducts_Result)">
+            <Parameter Name="qty" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Search_Store" ReturnType="Collection(InventoryStoreModel.Search_Store_Result)">
+            <Parameter Name="store_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetSales" ReturnType="Collection(InventoryStoreModel.sp_GetSales_Result)" />
+          <FunctionImport Name="sp_Notifications" ReturnType="Collection(InventoryStoreModel.sp_Notifications_Result)">
+            <Parameter Name="parlevel" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_NotificationsByLevel" ReturnType="Collection(InventoryStoreModel.sp_NotificationsByLevel_Result)">
+            <Parameter Name="parlevel" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveBrand" ReturnType="Collection(InventoryStoreModel.SP_SaveBrand_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="Category_id" Mode="In" Type="Int32" />
+            <Parameter Name="Company_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveCategory" ReturnType="Collection(InventoryStoreModel.SP_SaveCategory_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveGroup" ReturnType="Collection(InventoryStoreModel.SP_SaveGroup_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Menus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveOrder" ReturnType="Collection(InventoryStoreModel.SP_SaveOrder_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+            <Parameter Name="ItemsCount" Mode="In" Type="Int32" />
+            <Parameter Name="Cost" Mode="In" Type="Decimal" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="BillNo" Mode="In" Type="String" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+            <Parameter Name="Customer_Address" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="GrossAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="SerivceCharge" Mode="In" Type="Decimal" />
+            <Parameter Name="VatCharge" Mode="In" Type="Decimal" />
+            <Parameter Name="Discount" Mode="In" Type="Decimal" />
+            <Parameter Name="NetAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="PaidStatus" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveProduct" ReturnType="Collection(InventoryStoreModel.SP_SaveProduct_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="ProductName" Mode="In" Type="String" />
+            <Parameter Name="SKU" Mode="In" Type="String" />
+            <Parameter Name="SupplierId" Mode="In" Type="Int32" />
+            <Parameter Name="CategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="BrandId" Mode="In" Type="Int32" />
+            <Parameter Name="StoreId" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="ExpiryDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Availability" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveStore" ReturnType="Collection(InventoryStoreModel.SP_SaveStore_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveSupplier" ReturnType="Collection(InventoryStoreModel.SP_SaveSupplier_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="ServiceCharge" Mode="In" Type="String" />
+            <Parameter Name="Vat" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="Currency" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SaveUser" ReturnType="Collection(InventoryStoreModel.SP_SaveUser_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Store">
+            <Parameter Name="Store_Name" Mode="In" Type="String" />
+            <Parameter Name="store_status" Mode="In" Type="Int32" />
+            <Parameter Name="store_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ViewAll_Stores" ReturnType="Collection(InventoryStoreModel.ViewAll_Stores_Result)" />
+        </EntityContainer>
+        <ComplexType Name="parlevelproducts_Result">
+          <Property Type="Int32" Name="Product_ID" Nullable="false" />
+          <Property Type="String" Name="Product_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SKU" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
+          <Property Type="Int32" Name="Category_Id" Nullable="false" />
+          <Property Type="Int32" Name="Brand_Id" Nullable="false" />
+          <Property Type="Int32" Name="Store_Id" Nullable="false" />
+          <Property Type="String" Name="Product_Description" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Product_Quantity" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="ExpiryDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Availability" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Search_Store_Result">
+          <Property Type="Int32" Name="Store_Id" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Store_Status" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetSales_Result">
+          <Property Type="Int32" Name="Products_Sales" Nullable="true" />
+          <Property Type="Int32" Name="YearofSale" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_Notifications_Result">
+          <Property Type="String" Name="Product_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="RemainingQuantity" Nullable="true" />
+          <Property Type="DateTime" Name="ExpiryDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
+          <Property Type="String" Name="Supplier_Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_NotificationsByLevel_Result">
+          <Property Type="String" Name="Product_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="RemainingQuantity" Nullable="true" />
+          <Property Type="DateTime" Name="ExpiryDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Supplier_Id" Nullable="false" />
+          <Property Type="String" Name="Supplier_Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveBrand_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="26" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveCategory_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="29" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveGroup_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="26" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveOrder_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="29" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveProduct_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="28" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveStore_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="26" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveSupplier_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="29" />
+        </ComplexType>
+        <ComplexType Name="SP_SaveUser_Result">
+          <Property Type="Int32" Name="Result" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="false" MaxLength="24" />
+        </ComplexType>
+        <ComplexType Name="ViewAll_Stores_Result">
+          <Property Type="Int32" Name="Store_Id" Nullable="false" />
+          <Property Type="String" Name="Store_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Store_Status" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryStoreModelStoreContainer" CdmEntityContainer="InventoryStoreEntityConnection">
+          <EntitySetMapping Name="tbl_Brands">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Brands">
+              <MappingFragment StoreEntitySet="tbl_Brands">
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+                <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
+                <ScalarProperty Name="Brand_Status" ColumnName="Brand_Status" />
+                <ScalarProperty Name="Category_id" ColumnName="Category_id" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Categories">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Categories">
+              <MappingFragment StoreEntitySet="tbl_Categories">
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Category_Status" ColumnName="Category_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Groups">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Groups">
+              <MappingFragment StoreEntitySet="tbl_Groups">
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+                <ScalarProperty Name="Menu_Access" ColumnName="Menu_Access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Orders">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Orders">
+              <MappingFragment StoreEntitySet="tbl_Orders">
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Items_Count" ColumnName="Items_Count" />
+                <ScalarProperty Name="Product_Cost" ColumnName="Product_Cost" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
+                <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Gross_Amount" ColumnName="Gross_Amount" />
+                <ScalarProperty Name="Service_Charge" ColumnName="Service_Charge" />
+                <ScalarProperty Name="Vat_Charge" ColumnName="Vat_Charge" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+                <ScalarProperty Name="Paid_Status" ColumnName="Paid_Status" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Products">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Products">
+              <MappingFragment StoreEntitySet="tbl_Products">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />
+                <ScalarProperty Name="Product_Quantity" ColumnName="Product_Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Stores">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Stores">
+              <MappingFragment StoreEntitySet="tbl_Stores">
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Store_Status" ColumnName="Store_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Supplier">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Supplier">
+              <MappingFragment StoreEntitySet="tbl_Supplier">
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+                <ScalarProperty Name="Service_Charge_Value" ColumnName="Service_Charge_Value" />
+                <ScalarProperty Name="Vat_Charge_Value" ColumnName="Vat_Charge_Value" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Users">
+            <EntityTypeMapping TypeName="InventoryStoreModel.tbl_Users">
+              <MappingFragment StoreEntitySet="tbl_Users">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="delete_Store" FunctionName="InventoryStoreModel.Store.delete_Store" />
+          <FunctionImportMapping FunctionImportName="parlevelproducts" FunctionName="InventoryStoreModel.Store.parlevelproducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.parlevelproducts_Result">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />
+                <ScalarProperty Name="Product_Quantity" ColumnName="Product_Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Search_Store" FunctionName="InventoryStoreModel.Store.Search_Store">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.Search_Store_Result">
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Store_Status" ColumnName="Store_Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSales" FunctionName="InventoryStoreModel.Store.sp_GetSales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.sp_GetSales_Result">
+                <ScalarProperty Name="Products_Sales" ColumnName="Products_Sales" />
+                <ScalarProperty Name="YearofSale" ColumnName="YearofSale" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Notifications" FunctionName="InventoryStoreModel.Store.sp_Notifications">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.sp_Notifications_Result">
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="RemainingQuantity" ColumnName="RemainingQuantity" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_NotificationsByLevel" FunctionName="InventoryStoreModel.Store.sp_NotificationsByLevel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.sp_NotificationsByLevel_Result">
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="RemainingQuantity" ColumnName="RemainingQuantity" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveBrand" FunctionName="InventoryStoreModel.Store.SP_SaveBrand">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveBrand_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveCategory" FunctionName="InventoryStoreModel.Store.SP_SaveCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveCategory_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveGroup" FunctionName="InventoryStoreModel.Store.SP_SaveGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveGroup_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveOrder" FunctionName="InventoryStoreModel.Store.SP_SaveOrder">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveOrder_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveProduct" FunctionName="InventoryStoreModel.Store.SP_SaveProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveProduct_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveStore" FunctionName="InventoryStoreModel.Store.SP_SaveStore">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveStore_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveSupplier" FunctionName="InventoryStoreModel.Store.SP_SaveSupplier">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveSupplier_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveUser" FunctionName="InventoryStoreModel.Store.SP_SaveUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.SP_SaveUser_Result">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Update_Store" FunctionName="InventoryStoreModel.Store.Update_Store" />
+          <FunctionImportMapping FunctionImportName="ViewAll_Stores" FunctionName="InventoryStoreModel.Store.ViewAll_Stores">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryStoreModel.ViewAll_Stores_Result">
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Store_Status" ColumnName="Store_Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

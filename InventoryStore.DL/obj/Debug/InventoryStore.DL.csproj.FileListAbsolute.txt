@@ -1,0 +1,10 @@
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\bin\Debug\InventoryStore.DL.dll.config
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\bin\Debug\InventoryStore.DL.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\bin\Debug\InventoryStore.DL.pdb
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\bin\Debug\EntityFramework.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\bin\Debug\EntityFramework.xml
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\obj\Debug\InventoryStore.DL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\obj\Debug\InventoryStore.DL.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\InventoryStore\InventoryStore.DL\obj\Debug\InventoryStore.DL.pdb
